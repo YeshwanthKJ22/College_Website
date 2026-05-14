@@ -36,23 +36,23 @@ html, body, [class*="css"] {
 .premium-course-box {
     background: linear-gradient(to right, #ffffff, #f0f6ff);
     border-radius: 18px;
-    padding: 30px;
+    padding: 25px;
     margin-bottom: 20px;
     border: 2px solid #d6e4ff;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
     text-align: center;
-    transition: 0.3s;
+    cursor: pointer;
 }
 
 .selected-course-box {
-    background: linear-gradient(to right, #ffe0b3, #ffcc80);
+    background: linear-gradient(to right, #fff4e6, #ffe0b3);
     border-radius: 18px;
-    padding: 30px;
+    padding: 25px;
     margin-bottom: 20px;
-    border: 3px solid #ff8800;
-    box-shadow: 0px 6px 16px rgba(0,0,0,0.18);
+    border: 3px solid #ff9900;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
     text-align: center;
-    transition: 0.3s;
+    cursor: pointer;
 }
 
 .premium-course-title {
@@ -63,20 +63,16 @@ html, body, [class*="css"] {
     text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
 }
 
-.course-button button {
-    width: 100%;
-    height: 120px;
-    background-color: transparent;
-    border: none;
-    margin-top: -120px;
-    opacity: 0;
-    cursor: pointer;
+.fee-style {
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 footer {
     text-align: center;
     font-size: 18px;
-    color: #ffb400;
+    color: #555;
 }
 
 </style>
@@ -105,6 +101,57 @@ with col2:
     )
 
 st.markdown("---")
+
+# ---------------------------------------------------
+# COLLEGE INFRASTRUCTURE SECTION
+# ---------------------------------------------------
+st.header("🏛️ College Infrastructure")
+
+st.markdown("""
+### Career Depth, Vision High Campus
+
+Career Depth, Vision High provides world-class infrastructure
+designed to support academic excellence and student growth.
+""")
+
+left_col, right_col = st.columns(2)
+
+with left_col:
+
+    st.markdown("""
+    ## 🏢 Campus Facilities
+
+    - Smart Digital Classrooms
+    - Advanced Computer Laboratories
+    - High Speed Wi-Fi Campus
+    - Modern Library with Digital Resources
+    - Placement & Training Center
+    - Seminar and Conference Halls
+    - Sports and Recreation Facilities
+    - Innovation & Research Labs
+    - Cafeteria and Student Activity Center
+    """)
+
+with right_col:
+
+    st.markdown("""
+    ## ⭐ Why Choose Our College?
+
+    - Experienced Faculty Members
+    - Industry Oriented Curriculum
+    - Placement Assistance
+    - Practical Learning Environment
+    - Career Development Programs
+    - Student Friendly Campus
+    - Modern Teaching Methods
+    - Skill Development Programs
+    - Internship Opportunities
+    """)
+
+st.markdown("""
+Our institution focuses on building future leaders with
+innovation, creativity, and professional excellence.
+""")
 
 # ---------------------------------------------------
 # COURSE DATA
@@ -217,47 +264,16 @@ courses = {
 }
 
 # ---------------------------------------------------
-# COLLEGE INFRASTRUCTURE SECTION
-# ---------------------------------------------------
-st.header("🏛️ College Infrastructure")
-
-left_col, right_col = st.columns(2)
-
-with left_col:
-
-    st.markdown("""
-    ### Campus Facilities
-
-    - Smart Digital Classrooms
-    - Advanced Computer Laboratories
-    - High Speed Wi-Fi Campus
-    - Modern Library
-    - Placement & Training Center
-    - Innovation Labs
-    - Seminar Halls
-    - Sports Facilities
-    """)
-
-with right_col:
-
-    st.markdown("""
-    ### Why Choose Our College?
-
-    - Industry Oriented Curriculum
-    - Experienced Faculty
-    - Placement Assistance
-    - Career Development Programs
-    - Internship Opportunities
-    - Practical Learning Environment
-    - Student Friendly Campus
-    """)
-
-# ---------------------------------------------------
-# PREMIUM COURSES SECTION
+# PREMIUM COURSES OFFERED SECTION
 # ---------------------------------------------------
 st.markdown("---")
 
 st.header("🎓 Courses Offered")
+
+st.write("""
+Explore our Undergraduate and Postgraduate programs designed
+for academic excellence and career growth.
+""")
 
 course_names = list(courses.keys())
 
@@ -272,11 +288,7 @@ for index, course in enumerate(course_names):
 
         selected = st.session_state["selected_course"] == course
 
-        box_class = (
-            "selected-course-box"
-            if selected
-            else "premium-course-box"
-        )
+        box_class = "selected-course-box" if selected else "premium-course-box"
 
         st.markdown(
             f"""
@@ -287,8 +299,7 @@ for index, course in enumerate(course_names):
             unsafe_allow_html=True
         )
 
-        if st.button("", key=f"course_{course}"):
-
+        if st.button(course, key=f"course_{course}"):
             st.session_state["selected_course"] = course
 
 # ---------------------------------------------------
@@ -298,7 +309,6 @@ selected = st.session_state["selected_course"]
 details = courses[selected]
 
 st.markdown("---")
-
 st.subheader(f"📘 {selected} Course Details")
 
 st.write(f"### Full Course Name: {details['full_name']}")
@@ -367,29 +377,53 @@ with right_col:
 
     st.header("🤖 AI Bot Assistant")
 
+    st.write("""
+    Ask questions related to:
+    - Courses
+    - Fees
+    - Admissions
+    - Placements
+    - Careers
+    - Studies
+    """)
+
     user_question = st.text_input("Ask Your Question")
 
     if user_question:
 
         question = user_question.lower()
 
-        if "fees" in question:
+        response = ""
+
+        if "bca" in question:
+            response = "BCA focuses on Programming, Software Development, AI, Cloud Computing and Web Technologies."
+
+        elif "mba" in question:
+            response = "MBA develops Leadership, Marketing, Finance and Human Resource Management skills."
+
+        elif "fees" in question:
             response = "Course fees range between ₹45,000 and ₹1,20,000 per year."
 
         elif "admission" in question:
-            response = "Admissions are currently open for all courses."
+            response = "Admissions are currently open for all Undergraduate and Postgraduate programs."
 
         elif "placement" in question:
-            response = "Placement support is available for IT, Banking, HR and Marketing sectors."
+            response = "Placement support is available for IT, Banking, Marketing, HR and Analytics sectors."
 
-        elif "bca" in question:
-            response = "BCA focuses on Programming, AI, Web Development and Software Engineering."
+        elif "career" in question:
+            response = "Career opportunities include Software Engineer, HR Manager, Analyst, Professor and Business Executive."
 
-        elif "mba" in question:
-            response = "MBA develops Leadership, Marketing and Business Management skills."
+        elif "study" in question:
+            response = "Maintain daily study schedules, practice regularly and participate in practical learning."
 
         else:
-            response = "Our college provides quality education, career development and placement assistance."
+            response = f"""
+            Thank you for your question:
+            "{user_question}"
+
+            Our college provides quality education,
+            placement assistance and career development programs.
+            """
 
         st.success(response)
 
