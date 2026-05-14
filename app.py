@@ -256,14 +256,18 @@ if "selected_course" in st.session_state:
         st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------------------------------------------------
-# REGISTRATION FORM
+# REGISTRATION + AI BOT SECTION
 # ---------------------------------------------------
 st.markdown("---")
-st.header("📝 Student Registration")
 
-form_container, empty_space = st.columns([2,3])
+left_col, right_col = st.columns(2)
 
-with form_container:
+# ---------------------------------------------------
+# STUDENT REGISTRATION
+# ---------------------------------------------------
+with left_col:
+
+    st.header("📝 Student Registration")
 
     with st.form("registration_form"):
 
@@ -275,28 +279,69 @@ with form_container:
 
         submit = st.form_submit_button("Register Now")
 
-    if submit:
+        if submit:
 
-        registration_id = f"CDVH{random.randint(10000,99999)}"
+            registration_id = f"CDVH{random.randint(10000,99999)}"
 
-        st.success("✅ Registration Successful")
+            st.success("✅ Registration Successful")
 
-        st.write(f"## Registration ID: {registration_id}")
+            st.write(f"## Registration ID: {registration_id}")
 
-        data = {
-            "Registration ID": [registration_id],
-            "Student Name": [student_name],
-            "Email": [student_email],
-            "Phone": [student_phone],
-            "Course": [student_course],
-            "Address": [student_address]
-        }
+            data = {
+                "Registration ID": [registration_id],
+                "Student Name": [student_name],
+                "Email": [student_email],
+                "Phone": [student_phone],
+                "Course": [student_course],
+                "Address": [student_address]
+            }
 
-        df = pd.DataFrame(data)
+            df = pd.DataFrame(data)
 
-        st.subheader("📄 Registered Student Details")
-        st.dataframe(df)
+            st.subheader("📄 Registered Student Details")
+            st.dataframe(df)
 
+# ---------------------------------------------------
+# AI BOT SECTION
+# ---------------------------------------------------
+with right_col:
+
+    st.header("🤖 AI Bot Assistant")
+
+    st.write("""
+    Welcome to the AI College Assistant.
+    
+    Ask questions related to:
+    - Courses
+    - Admissions
+    - Fees
+    - Career Opportunities
+    - Placements
+    """)
+
+    user_question = st.text_input("Ask Your Question")
+
+    if user_question:
+
+        question = user_question.lower()
+
+        if "course" in question:
+            st.success("We offer BCA, BBM, BCom, BA, MCA, MBA, MCom and MA courses.")
+
+        elif "fees" in question:
+            st.info("Course fees vary from ₹45,000 to ₹1,20,000 per year depending on the course.")
+
+        elif "admission" in question:
+            st.success("Admissions are currently open for all UG and PG programs.")
+
+        elif "placement" in question:
+            st.info("Placement support is available for IT, Finance, HR, Marketing and Analytics sectors.")
+
+        elif "career" in question:
+            st.success("Career opportunities include Software Engineer, Financial Analyst, HR Manager, Professor and Data Analyst.")
+
+        else:
+            st.write("AI Bot: Please contact the college administration for more details.")
 # ---------------------------------------------------
 # FOOTER
 # ---------------------------------------------------
