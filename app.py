@@ -264,30 +264,75 @@ st.markdown("""
 Our institution focuses on building future leaders with
 innovation, creativity, and professional excellence.
 """)
+
 # ---------------------------------------------------
-# COURSE SHOWCASE
+# PREMIUM COURSES OFFERED SECTION
 # ---------------------------------------------------
+st.markdown("---")
+
+st.markdown("""
+<style>
+
+.premium-course-box {
+    background: linear-gradient(to right, #ffffff, #f0f6ff);
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #d6e4ff;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.premium-course-title {
+    font-size: 30px;
+    font-weight: 900;
+    color: #ff6600;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+}
+
+.course-subtitle {
+    font-size: 16px;
+    color: #555555;
+    margin-bottom: 15px;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
 st.header("🎓 Courses Offered")
 
+st.markdown("""
+Explore our professionally designed Undergraduate and Postgraduate
+programs focused on innovation, leadership, technology, business,
+and academic excellence.
+""")
+
 course_names = list(courses.keys())
+
 cols = st.columns(4)
 
 for index, course in enumerate(course_names):
 
     with cols[index % 4]:
 
-        st.markdown('<div class="course-card">', unsafe_allow_html=True)
-
         st.markdown(
-            f'<div class="course-title">{course}</div>',
+            f"""
+            <div class="premium-course-box">
+                <div class="premium-course-title">{course}</div>
+                <div class="course-subtitle">
+                    Click below to explore course details
+                </div>
+            </div>
+            """,
             unsafe_allow_html=True
         )
 
-        if st.button(f"View Details - {course}", key=course):
+        if st.button(f"View Details", key=course):
             st.session_state["selected_course"] = course
-
-        st.markdown('</div>', unsafe_allow_html=True)
-
+            
 # ---------------------------------------------------
 # COURSE DETAILS
 # ---------------------------------------------------
