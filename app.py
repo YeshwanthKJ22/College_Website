@@ -63,7 +63,7 @@ html, body, [class*="css"] {
 footer {
     text-align: center;
     font-size: 18px;
-    color: #555;
+    color: #ffb400;
 }
 
 </style>
