@@ -337,7 +337,7 @@ for i in range(0, len(semester_items), 3):
                 f"""
                 <div style="
                     background: linear-gradient(to right, #ffffff, #eef4ff);
-                    padding:20px;
+                    padding:5px;
                     border-radius:18px;
                     border:2px solid #d6e4ff;
                     box-shadow:0px 4px 10px rgba(0,0,0,0.10);
