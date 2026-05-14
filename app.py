@@ -340,7 +340,7 @@ for i in range(0, len(semester_items), 3):
                     padding:5px;
                     border-radius:5px;
                     border:2px solid #FF000000;
-                    box-shadow:0px 4px 10px rgba(0,0,0,0.10);
+                    box-shadow:0px 0px 0px rgba(0,0,0,0.10);
                     margin-bottom:20px;
                     min-height:10px;
                 ">
