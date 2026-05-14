@@ -41,10 +41,12 @@ html, body, [class*="css"] {
 }
 
 .course-title {
-    color: #002855;
-    font-size: 28px;
-    font-weight: bold;
+    color: #ff6600;
+    font-size: 32px;
+    font-weight: 900;
     margin-bottom: 15px;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.25);
+    letter-spacing: 1px;
 }
 
 .fee-style {
