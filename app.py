@@ -316,13 +316,14 @@ st.write(f"### Full Course Name: {details['full_name']}")
 st.write(f"### 💰 Fees Structure: {details['fees']}")
 st.write(f"### 📚 Number of Semesters: {details['semesters']}")
 
-st.markdown("### 📖 Semester Wise Subjects")
-
-semester_items = list(details["subjects"].items())
 
 # ---------------------------------------------------
 # DISPLAY 3 SEMESTERS IN ONE ROW
 # ---------------------------------------------------
+st.markdown("## 📖 Semester Wise Subjects")
+
+semester_items = list(details["subjects"].items())
+
 for i in range(0, len(semester_items), 3):
 
     cols = st.columns(3)
