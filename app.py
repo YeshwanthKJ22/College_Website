@@ -277,11 +277,20 @@ st.markdown("""
     background: linear-gradient(to right, #ffffff, #f0f6ff);
     border-radius: 18px;
     padding: 25px;
-    margin-bottom: 25px;
-    border: 1px solid #d6e4ff;
+    margin-bottom: 20px;
+    border: 2px solid #d6e4ff;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
     text-align: center;
-    transition: 0.3s;
+}
+
+.selected-course-box {
+    background: linear-gradient(to right, #fff4e6, #ffe0b3);
+    border-radius: 18px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 3px solid #ff9900;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+    text-align: center;
 }
 
 .premium-course-title {
@@ -289,14 +298,7 @@ st.markdown("""
     font-weight: 900;
     color: #ff6600;
     letter-spacing: 1px;
-    margin-bottom: 10px;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
-}
-
-.course-subtitle {
-    font-size: 16px;
-    color: #555555;
-    margin-bottom: 15px;
 }
 
 </style>
@@ -304,35 +306,85 @@ st.markdown("""
 
 st.header("🎓 Courses Offered")
 
-st.markdown("""
-Explore our professionally designed Undergraduate and Postgraduate
-programs focused on innovation, leadership, technology, business,
-and academic excellence.
+st.write("""
+Explore our Undergraduate and Postgraduate programs designed
+for academic excellence and career growth.
 """)
 
 course_names = list(courses.keys())
 
+# ---------------------------------------------------
+# DEFAULT COURSE SELECTION
+# ---------------------------------------------------
+if "selected_course" not in st.session_state:
+    st.session_state["selected_course"] = course_names[0]
+
 cols = st.columns(4)
 
+# ---------------------------------------------------
+# COURSE BOXES
+# ---------------------------------------------------
 for index, course in enumerate(course_names):
 
     with cols[index % 4]:
 
-        st.markdown(
-            f"""
-            <div class="premium-course-box">
-                <div class="premium-course-title">{course}</div>
-                <div class="course-subtitle">
-                    Click below to explore course details
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        # Highlight Selected Course
+        if st.session_state["selected_course"] == course:
 
-        if st.button(f"View Details", key=course):
+            st.markdown(
+                f"""
+                <div class="selected-course-box">
+                    <div class="premium-course-title">{course}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        else:
+
+            st.markdown(
+                f"""
+                <div class="premium-course-box">
+                    <div class="premium-course-title">{course}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+        # Course Selection Button
+        if st.button(f"Select {course}", key=course):
             st.session_state["selected_course"] = course
-            
+
+# ---------------------------------------------------
+# SINGLE VIEW DETAILS BUTTON
+# ---------------------------------------------------
+st.markdown("<br>", unsafe_allow_html=True)
+
+view_details = st.button("📘 View Selected Course Details")
+
+# ---------------------------------------------------
+# COURSE DETAILS
+# ---------------------------------------------------
+if view_details or "selected_course" in st.session_state:
+
+    selected = st.session_state["selected_course"]
+    details = courses[selected]
+
+    st.markdown("---")
+    st.subheader(f"📘 {selected} Course Details")
+
+    st.write(f"### Full Course Name: {details['full_name']}")
+    st.write(f"### 💰 Fees Structure: {details['fees']}")
+    st.write(f"### 📚 Number of Semesters: {details['semesters']}")
+
+    st.markdown("## Semester Wise Subjects")
+
+    for semester, subjects in details["subjects"].items():
+
+        st.write(f"### {semester}")
+
+        for subject in subjects:
+            st.write(f"• {subject}")            
 # ---------------------------------------------------
 # COURSE DETAILS
 # ---------------------------------------------------
