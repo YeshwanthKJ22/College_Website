@@ -309,14 +309,17 @@ with right_col:
     st.header("🤖 AI Bot Assistant")
 
     st.write("""
-    Welcome to the AI College Assistant.
-    
-    Ask questions related to:
+    Welcome to the Smart College AI Assistant.
+
+    You can ask questions related to:
     - Courses
-    - Admissions
+    - Studies
     - Fees
-    - Career Opportunities
+    - Admissions
+    - Organizations
     - Placements
+    - Career Opportunities
+    - College Information
     """)
 
     user_question = st.text_input("Ask Your Question")
@@ -325,82 +328,188 @@ with right_col:
 
         question = user_question.lower()
 
+        response = ""
+
         # ---------------------------------------------------
-        # DYNAMIC AI RESPONSES
+        # COURSE RELATED
         # ---------------------------------------------------
 
         if "bca" in question:
-            st.success("""
-            BCA stands for Bachelor of Computer Applications.
-            Duration: 3 Years
-            Focus Areas: Programming, Software Development, AI, Cloud Computing.
-            Career Opportunities: Software Developer, Data Analyst, Web Developer.
-            """)
+            response = """
+            BCA (Bachelor of Computer Applications) focuses on:
+            - Programming
+            - Web Development
+            - Database Management
+            - Artificial Intelligence
+            - Software Development
+
+            Career Opportunities:
+            Software Developer, Web Developer, Data Analyst, AI Engineer.
+            """
 
         elif "mba" in question:
-            st.success("""
-            MBA stands for Master of Business Administration.
-            Duration: 2 Years
-            Focus Areas: Finance, Marketing, HR, Leadership.
-            Career Opportunities: Manager, HR Executive, Business Analyst.
-            """)
+            response = """
+            MBA (Master of Business Administration) develops:
+            - Leadership Skills
+            - Marketing Knowledge
+            - Financial Management
+            - Human Resource Management
+
+            Career Opportunities:
+            Business Analyst, HR Manager, Marketing Manager, Entrepreneur.
+            """
 
         elif "mca" in question:
-            st.success("""
-            MCA stands for Master of Computer Applications.
-            Duration: 2 Years
-            Focus Areas: Advanced Programming, AI, Cyber Security.
-            Career Opportunities: Software Engineer, AI Engineer, Cloud Architect.
-            """)
+            response = """
+            MCA (Master of Computer Applications) focuses on:
+            - Advanced Programming
+            - Cloud Computing
+            - Cyber Security
+            - Machine Learning
 
-        elif "fees" in question:
-            st.info("""
-            Course fee structure ranges from ₹45,000 to ₹1,20,000 per year depending on the selected course.
-            """)
+            Career Opportunities:
+            Software Engineer, AI Engineer, Cloud Architect.
+            """
 
-        elif "admission" in question:
-            st.success("""
-            Admissions are currently open for all Undergraduate and Postgraduate programs.
-            Required documents:
-            - Academic Marks Cards
-            - ID Proof
+        elif "bcom" in question or "commerce" in question:
+            response = """
+            B.Com focuses on:
+            - Accounting
+            - Finance
+            - Taxation
+            - Banking
+
+            Career Opportunities:
+            Accountant, Auditor, Financial Analyst, Banking Professional.
+            """
+
+        elif "ba" in question or "arts" in question:
+            response = """
+            BA and MA courses focus on:
+            - Humanities
+            - Literature
+            - Psychology
+            - Sociology
+            - Communication Skills
+
+            Career Opportunities:
+            Professor, Journalist, Writer, Social Worker.
+            """
+
+        # ---------------------------------------------------
+        # FEES RELATED
+        # ---------------------------------------------------
+
+        elif "fees" in question or "fee" in question:
+            response = """
+            Fee Structure:
+
+            - BCA : ₹75,000 / Year
+            - BBM : ₹68,000 / Year
+            - BCom : ₹60,000 / Year
+            - BA : ₹45,000 / Year
+            - MCA : ₹95,000 / Year
+            - MBA : ₹1,20,000 / Year
+            - MCom : ₹82,000 / Year
+            - MA : ₹70,000 / Year
+            """
+
+        # ---------------------------------------------------
+        # ADMISSION RELATED
+        # ---------------------------------------------------
+
+        elif "admission" in question or "apply" in question:
+            response = """
+            Admissions are currently open.
+
+            Required Documents:
+            - Marks Cards
+            - Aadhaar Card
             - Passport Size Photos
-            """)
+            - Transfer Certificate
 
-        elif "placement" in question:
-            st.info("""
-            Placement support is available for:
-            - IT Companies
+            You can register through the Student Registration section.
+            """
+
+        # ---------------------------------------------------
+        # PLACEMENT RELATED
+        # ---------------------------------------------------
+
+        elif "placement" in question or "job" in question:
+            response = """
+            Placement Opportunities:
+
+            - Software Companies
             - Banking Sector
-            - Marketing Firms
-            - HR Companies
+            - Marketing Companies
+            - HR Organizations
             - Analytics Companies
-            """)
 
-        elif "career" in question:
-            st.success("""
-            Popular career opportunities include:
-            - Software Engineer
-            - Financial Analyst
-            - HR Manager
-            - Data Analyst
-            - Marketing Executive
-            - Professor
-            """)
+            Top students receive internship and placement support.
+            """
+
+        # ---------------------------------------------------
+        # ORGANIZATION / COLLEGE RELATED
+        # ---------------------------------------------------
+
+        elif "organization" in question or "college" in question:
+            response = """
+            Career Depth, Vision High is focused on:
+            - Quality Education
+            - Innovation
+            - Skill Development
+            - Leadership Training
+            - Career Growth
+
+            Our goal is to prepare students for successful careers.
+            """
+
+        # ---------------------------------------------------
+        # STUDIES RELATED
+        # ---------------------------------------------------
+
+        elif "study" in question or "studies" in question:
+            response = """
+            Effective study tips:
+            - Maintain daily study schedule
+            - Practice previous question papers
+            - Focus on practical learning
+            - Improve communication skills
+            - Participate in projects and seminars
+            """
+
+        # ---------------------------------------------------
+        # GREETINGS
+        # ---------------------------------------------------
 
         elif "hello" in question or "hi" in question:
-            st.write("👋 Hello! Welcome to Career Depth, Vision High. How can I help you today?")
+            response = """
+            Hello 👋
+            Welcome to Career Depth, Vision High.
+            How can I assist you today?
+            """
+
+        # ---------------------------------------------------
+        # DEFAULT RESPONSE
+        # ---------------------------------------------------
 
         else:
-            st.write(f"""
-            AI Bot Response:
+            response = f"""
+            Thank you for your question:
 
-            Thank you for your question: "{user_question}"
+            "{user_question}"
 
-            Our college provides high quality education, placement assistance,
-            modern curriculum, and career guidance for all students.
-            Please contact the administration office for detailed support.
-            """)# ---------------------------------------------------
+            Our AI Assistant is continuously learning to support students with:
+            - Academic Information
+            - Course Guidance
+            - Fees Information
+            - Career Opportunities
+            - Placement Assistance
+
+            Please contact the college administration for more detailed support.
+            """
+
+        st.success(response)
 # FOOTER
 # ---------------------------------------------------
 st.markdown("---")
