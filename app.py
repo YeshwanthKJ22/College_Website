@@ -264,6 +264,18 @@ course_names = list(courses.keys())
 if "selected_course" not in st.session_state:
     st.session_state["selected_course"] = course_names[0]
 
+# ---------------------------------------------------
+# QUERY PARAMS FOR CLICKABLE COURSE BOXES
+# ---------------------------------------------------
+query_params = st.query_params
+
+if "course" in query_params:
+
+    selected_course = query_params["course"]
+
+    if selected_course in courses:
+        st.session_state["selected_course"] = selected_course
+
 cols = st.columns(4)
 
 for index, course in enumerate(course_names):
@@ -278,18 +290,40 @@ for index, course in enumerate(course_names):
             else "premium-course-box"
         )
 
+        select_symbol = "✅ SELECTED" if selected else "👉 SELECT"
+
         st.markdown(
             f"""
-            <div class="{box_class}">
-                <div class="premium-course-title">{course}</div>
-            </div>
+            <a href='/?course={course}' target='_self'
+            style='text-decoration:none;'>
+
+                <div class="{box_class}">
+
+                    <div class="premium-course-title">
+                        {course}
+                    </div>
+
+                    <br>
+
+                    <div style="
+                        font-size:18px;
+                        font-weight:bold;
+                        color:#003366;
+                        background-color:white;
+                        padding:10px;
+                        border-radius:10px;
+                        display:inline-block;
+                        box-shadow:0px 2px 6px rgba(0,0,0,0.15);
+                    ">
+                        {select_symbol}
+                    </div>
+
+                </div>
+
+            </a>
             """,
             unsafe_allow_html=True
         )
-
-        if st.button("", key=f"course_{course}"):
-
-            st.session_state["selected_course"] = course
 
 # ---------------------------------------------------
 # COURSE DETAILS
