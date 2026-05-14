@@ -316,7 +316,7 @@ st.write(f"### Full Course Name: {details['full_name']}")
 st.write(f"### 💰 Fees Structure: {details['fees']}")
 st.write(f"### 📚 Number of Semesters: {details['semesters']}")
 
-st.markdown(f"### 📖 Semester Wise Subjects")
+st.markdown("### 📖 Semester Wise Subjects")
 
 semester_items = list(details["subjects"].items())
 
