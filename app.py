@@ -325,24 +325,82 @@ with right_col:
 
         question = user_question.lower()
 
-        if "course" in question:
-            st.success("We offer BCA, BBM, BCom, BA, MCA, MBA, MCom and MA courses.")
+        # ---------------------------------------------------
+        # DYNAMIC AI RESPONSES
+        # ---------------------------------------------------
+
+        if "bca" in question:
+            st.success("""
+            BCA stands for Bachelor of Computer Applications.
+            Duration: 3 Years
+            Focus Areas: Programming, Software Development, AI, Cloud Computing.
+            Career Opportunities: Software Developer, Data Analyst, Web Developer.
+            """)
+
+        elif "mba" in question:
+            st.success("""
+            MBA stands for Master of Business Administration.
+            Duration: 2 Years
+            Focus Areas: Finance, Marketing, HR, Leadership.
+            Career Opportunities: Manager, HR Executive, Business Analyst.
+            """)
+
+        elif "mca" in question:
+            st.success("""
+            MCA stands for Master of Computer Applications.
+            Duration: 2 Years
+            Focus Areas: Advanced Programming, AI, Cyber Security.
+            Career Opportunities: Software Engineer, AI Engineer, Cloud Architect.
+            """)
 
         elif "fees" in question:
-            st.info("Course fees vary from ₹45,000 to ₹1,20,000 per year depending on the course.")
+            st.info("""
+            Course fee structure ranges from ₹45,000 to ₹1,20,000 per year depending on the selected course.
+            """)
 
         elif "admission" in question:
-            st.success("Admissions are currently open for all UG and PG programs.")
+            st.success("""
+            Admissions are currently open for all Undergraduate and Postgraduate programs.
+            Required documents:
+            - Academic Marks Cards
+            - ID Proof
+            - Passport Size Photos
+            """)
 
         elif "placement" in question:
-            st.info("Placement support is available for IT, Finance, HR, Marketing and Analytics sectors.")
+            st.info("""
+            Placement support is available for:
+            - IT Companies
+            - Banking Sector
+            - Marketing Firms
+            - HR Companies
+            - Analytics Companies
+            """)
 
         elif "career" in question:
-            st.success("Career opportunities include Software Engineer, Financial Analyst, HR Manager, Professor and Data Analyst.")
+            st.success("""
+            Popular career opportunities include:
+            - Software Engineer
+            - Financial Analyst
+            - HR Manager
+            - Data Analyst
+            - Marketing Executive
+            - Professor
+            """)
+
+        elif "hello" in question or "hi" in question:
+            st.write("👋 Hello! Welcome to Career Depth, Vision High. How can I help you today?")
 
         else:
-            st.write("AI Bot: Please contact the college administration for more details.")
-# ---------------------------------------------------
+            st.write(f"""
+            AI Bot Response:
+
+            Thank you for your question: "{user_question}"
+
+            Our college provides high quality education, placement assistance,
+            modern curriculum, and career guidance for all students.
+            Please contact the administration office for detailed support.
+            """)# ---------------------------------------------------
 # FOOTER
 # ---------------------------------------------------
 st.markdown("---")
