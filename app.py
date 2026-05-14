@@ -34,12 +34,9 @@ html, body, [class*="css"] {
 }
 
 .course-card {
-    background: linear-gradient(to bottom right, #ffffff, #eaf4ff);
     border-radius: 20px;
     padding: 25px;
     margin-bottom: 20px;
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.15);
-    border: 2px solid #d6e7ff;
     text-align: center;
 }
 
