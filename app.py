@@ -204,6 +204,53 @@ courses = {
 }
 
 # ---------------------------------------------------
+# COLLEGE INFRASTRUCTURE SECTION
+# ---------------------------------------------------
+st.markdown("---")
+
+st.header("🏛️ College Infrastructure")
+
+infra_col1, infra_col2 = st.columns([2,3])
+
+with infra_col1:
+
+    st.image(
+        "https://images.unsplash.com/photo-1562774053-701939374585",
+        use_container_width=True
+    )
+
+with infra_col2:
+
+    st.markdown("""
+    ### Career Depth, Vision High Campus
+
+    Career Depth, Vision High provides world-class infrastructure
+    designed to support academic excellence and student growth.
+
+    #### Campus Facilities:
+    - Smart Digital Classrooms
+    - Advanced Computer Laboratories
+    - High Speed Wi-Fi Campus
+    - Modern Library with Digital Resources
+    - Placement & Training Center
+    - Seminar and Conference Halls
+    - Sports and Recreation Facilities
+    - Innovation & Research Labs
+    - Cafeteria and Student Activity Center
+
+    #### Why Choose Our College?
+    - Experienced Faculty Members
+    - Industry Oriented Curriculum
+    - Placement Assistance
+    - Practical Learning Environment
+    - Career Development Programs
+    - Student Friendly Campus
+
+    Our institution focuses on building future leaders with
+    innovation, creativity, and professional excellence.
+    """)
+
+# ---------------------------------------------------
 # COURSE SHOWCASE
 # ---------------------------------------------------
 st.header("🎓 Courses Offered")
