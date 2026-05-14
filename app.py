@@ -342,12 +342,12 @@ for i in range(0, len(semester_items), 3):
                     border:2px solid #d6e4ff;
                     box-shadow:0px 4px 10px rgba(0,0,0,0.10);
                     margin-bottom:20px;
-                    min-height:5px;
+                    min-height:10px;
                 ">
                 <h3 style="
                     color:#ff6600;
                     text-align:left;
-                    font-weight:200;
+                    font-weight:700;
                 ">
                     {semester}
                 </h3>
