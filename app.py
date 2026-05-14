@@ -1,3 +1,6 @@
+# Updated app.py (Direct Click Course Boxes Without Visible Buttons)
+
+```python
 import streamlit as st
 import random
 import pandas as pd
@@ -63,14 +66,9 @@ html, body, [class*="css"] {
     text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
 }
 
-.course-button button {
-    width: 100%;
-    height: 120px;
-    background-color: transparent;
-    border: none;
-    margin-top: -120px;
-    opacity: 0;
-    cursor: pointer;
+/* REMOVE ALL STREAMLIT BUTTONS */
+div.stButton > button {
+    display: none;
 }
 
 footer {
@@ -165,56 +163,16 @@ courses = {
             "Semester 5": ["Media Studies", "Creative Writing", "Human Rights"],
             "Semester 6": ["Project", "Modern History", "Social Research"]
         }
-    },
-
-    "M.C.A": {
-        "full_name": "Master of Computer Applications",
-        "fees": "₹95,000 / Year",
-        "semesters": 4,
-        "subjects": {
-            "Semester 1": ["Advanced Programming", "Data Structures", "Mathematics"],
-            "Semester 2": ["Cloud Computing", "AI", "Database Systems"],
-            "Semester 3": ["Machine Learning", "Cyber Security", "Big Data"],
-            "Semester 4": ["Project Work", "Research", "Software Architecture"]
-        }
-    },
-
-    "M.B.A": {
-        "full_name": "Master of Business Administration",
-        "fees": "₹1,20,000 / Year",
-        "semesters": 4,
-        "subjects": {
-            "Semester 1": ["Management", "Accounting", "Economics"],
-            "Semester 2": ["Marketing", "HR", "Finance"],
-            "Semester 3": ["Business Analytics", "Leadership", "Operations"],
-            "Semester 4": ["Project", "Strategic Management", "International Business"]
-        }
-    },
-
-    "M.Com": {
-        "full_name": "Master of Commerce",
-        "fees": "₹82,000 / Year",
-        "semesters": 4,
-        "subjects": {
-            "Semester 1": ["Advanced Accounting", "Economics", "Finance"],
-            "Semester 2": ["Taxation", "Research Methods", "Banking"],
-            "Semester 3": ["Investment Analysis", "Corporate Law", "Auditing"],
-            "Semester 4": ["Project", "Financial Markets", "Business Ethics"]
-        }
-    },
-
-    "M.A": {
-        "full_name": "Master of Arts",
-        "fees": "₹70,000 / Year",
-        "semesters": 4,
-        "subjects": {
-            "Semester 1": ["Advanced Literature", "Sociology", "Psychology"],
-            "Semester 2": ["Communication", "Philosophy", "Political Science"],
-            "Semester 3": ["Media Studies", "Human Rights", "Research"],
-            "Semester 4": ["Project", "Cultural Studies", "Creative Writing"]
-        }
     }
 }
+
+# ---------------------------------------------------
+# DEFAULT COURSE
+# ---------------------------------------------------
+course_names = list(courses.keys())
+
+if "selected_course" not in st.session_state:
+    st.session_state["selected_course"] = course_names[0]
 
 # ---------------------------------------------------
 # COLLEGE INFRASTRUCTURE SECTION
@@ -259,10 +217,7 @@ st.markdown("---")
 
 st.header("🎓 Courses Offered")
 
-course_names = list(courses.keys())
-
-if "selected_course" not in st.session_state:
-    st.session_state["selected_course"] = course_names[0]
+st.info("Click any course box to view the complete course details.")
 
 cols = st.columns(4)
 
@@ -278,18 +233,26 @@ for index, course in enumerate(course_names):
             else "premium-course-box"
         )
 
-        st.markdown(
-            f"""
-            <div class="{box_class}">
-                <div class="premium-course-title">{course}</div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        if st.container(border=False):
 
-        if st.button("", key=f"course_{course}"):
+            st.markdown(
+                f"""
+                <div class="{box_class}">
+                    <div class="premium-course-title">{course}</div>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
 
-            st.session_state["selected_course"] = course
+            # Hidden clickable action
+            clicked = st.checkbox(
+                label=f"click_{course}",
+                key=f"click_{course}",
+                label_visibility="collapsed"
+            )
+
+            if clicked:
+                st.session_state["selected_course"] = course
 
 # ---------------------------------------------------
 # COURSE DETAILS
@@ -407,3 +370,11 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+```
+
+# requirements.txt
+
+```txt
+streamlit
+pandas
+```
