@@ -336,7 +336,7 @@ for i in range(0, len(semester_items), 3):
             st.markdown(
                 f"""
                 <div style="
-                    background: linear-gradient(to right, #ffffff, #eef4ff);
+                    background: linear-gradient(to right, #FF000000, #eef4ff);
                     padding:5px;
                     border-radius:5px;
                     border:2px solid #d6e4ff;
