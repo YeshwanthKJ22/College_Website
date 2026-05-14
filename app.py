@@ -281,6 +281,7 @@ st.markdown("""
     border: 2px solid #d6e4ff;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
     text-align: center;
+    cursor: pointer;
 }
 
 .selected-course-box {
@@ -291,6 +292,7 @@ st.markdown("""
     border: 3px solid #ff9900;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
     text-align: center;
+    cursor: pointer;
 }
 
 .premium-course-title {
@@ -299,6 +301,13 @@ st.markdown("""
     color: #ff6600;
     letter-spacing: 1px;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+}
+
+div.stButton > button {
+    width: 100%;
+    height: 0px;
+    opacity: 0;
+    margin-top: -90px;
 }
 
 </style>
@@ -322,96 +331,56 @@ if "selected_course" not in st.session_state:
 cols = st.columns(4)
 
 # ---------------------------------------------------
-# COURSE BOXES
+# CLICKABLE COURSE BOXES
 # ---------------------------------------------------
 for index, course in enumerate(course_names):
 
     with cols[index % 4]:
 
-        # Highlight Selected Course
-        if st.session_state["selected_course"] == course:
+        selected = st.session_state["selected_course"] == course
 
-            st.markdown(
-                f"""
-                <div class="selected-course-box">
-                    <div class="premium-course-title">{course}</div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        box_class = (
+            "selected-course-box"
+            if selected
+            else "premium-course-box"
+        )
 
-        else:
+        st.markdown(
+            f"""
+            <div class="{box_class}">
+                <div class="premium-course-title">{course}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-            st.markdown(
-                f"""
-                <div class="premium-course-box">
-                    <div class="premium-course-title">{course}</div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        # Invisible clickable button
+        if st.button(course, key=f"course_{course}"):
 
-        # Course Selection Button
-        if st.button(f"Select {course}", key=course):
             st.session_state["selected_course"] = course
 
 # ---------------------------------------------------
-# SINGLE VIEW DETAILS BUTTON
-# ---------------------------------------------------
-st.markdown("<br>", unsafe_allow_html=True)
-
-view_details = st.button("📘 View Selected Course Details")
-
-# ---------------------------------------------------
 # COURSE DETAILS
 # ---------------------------------------------------
-if view_details or "selected_course" in st.session_state:
+selected = st.session_state["selected_course"]
+details = courses[selected]
 
-    selected = st.session_state["selected_course"]
-    details = courses[selected]
+st.markdown("---")
 
-    st.markdown("---")
-    st.subheader(f"📘 {selected} Course Details")
+st.subheader(f"📘 {selected} Course Details")
 
-    st.write(f"### Full Course Name: {details['full_name']}")
-    st.write(f"### 💰 Fees Structure: {details['fees']}")
-    st.write(f"### 📚 Number of Semesters: {details['semesters']}")
+st.write(f"### Full Course Name: {details['full_name']}")
+st.write(f"### 💰 Fees Structure: {details['fees']}")
+st.write(f"### 📚 Number of Semesters: {details['semesters']}")
 
-    st.markdown("## Semester Wise Subjects")
+st.markdown("## Semester Wise Subjects")
 
-    for semester, subjects in details["subjects"].items():
+for semester, subjects in details["subjects"].items():
 
-        st.write(f"### {semester}")
+    st.write(f"### {semester}")
 
-        for subject in subjects:
-            st.write(f"• {subject}")            
-# ---------------------------------------------------
-# COURSE DETAILS
-# ---------------------------------------------------
-if "selected_course" in st.session_state:
-
-    selected = st.session_state["selected_course"]
-    details = courses[selected]
-
-    st.markdown("---")
-    st.subheader(f"📘 {selected} Course Details")
-
-    st.write(f"### Full Course Name: {details['full_name']}")
-    st.write(f"### 💰 Fees Structure: {details['fees']}")
-    st.write(f"### 📚 Number of Semesters: {details['semesters']}")
-
-    st.markdown("## Semester Wise Subjects")
-
-    for semester, subjects in details["subjects"].items():
-
-        st.markdown('<div class="semester-box">', unsafe_allow_html=True)
-
-        st.write(f"### {semester}")
-
-        for subject in subjects:
-            st.write(f"• {subject}")
-
-        st.markdown('</div>', unsafe_allow_html=True)
+    for subject in subjects:
+        st.write(f"• {subject}")
 
 # ---------------------------------------------------
 # REGISTRATION + AI BOT SECTION
