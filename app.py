@@ -261,15 +261,19 @@ if "selected_course" in st.session_state:
 st.markdown("---")
 st.header("📝 Student Registration")
 
-with st.form("registration_form"):
+left_space, form_container, right_space = st.columns([1,2,1])
 
-    student_name = st.text_input("Student Full Name")
-    student_email = st.text_input("Email Address")
-    student_phone = st.text_input("Phone Number")
-    student_course = st.selectbox("Select Course", course_names)
-    student_address = st.text_area("Address")
+with form_container:
 
-    submit = st.form_submit_button("Register Now")
+    with st.form("registration_form"):
+
+        student_name = st.text_input("Student Full Name")
+        student_email = st.text_input("Email Address")
+        student_phone = st.text_input("Phone Number")
+        student_course = st.selectbox("Select Course", course_names)
+        student_address = st.text_area("Address")
+
+        submit = st.form_submit_button("Register Now")
 
     if submit:
 
