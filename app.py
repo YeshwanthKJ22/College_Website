@@ -309,20 +309,56 @@ selected = st.session_state["selected_course"]
 details = courses[selected]
 
 st.markdown("---")
+
 st.subheader(f"📘 {selected} Course Details")
 
 st.write(f"### Full Course Name: {details['full_name']}")
 st.write(f"### 💰 Fees Structure: {details['fees']}")
 st.write(f"### 📚 Number of Semesters: {details['semesters']}")
 
-st.markdown("## Semester Wise Subjects")
+st.markdown("## 📖 Semester Wise Subjects")
 
-for semester, subjects in details["subjects"].items():
+semester_items = list(details["subjects"].items())
 
-    st.write(f"### {semester}")
+# ---------------------------------------------------
+# DISPLAY 3 SEMESTERS IN ONE ROW
+# ---------------------------------------------------
+for i in range(0, len(semester_items), 3):
 
-    for subject in subjects:
-        st.write(f"• {subject}")
+    cols = st.columns(3)
+
+    row_data = semester_items[i:i+3]
+
+    for col, (semester, subjects) in zip(cols, row_data):
+
+        with col:
+
+            st.markdown(
+                f"""
+                <div style="
+                    background: linear-gradient(to right, #ffffff, #eef4ff);
+                    padding:20px;
+                    border-radius:18px;
+                    border:2px solid #d6e4ff;
+                    box-shadow:0px 4px 10px rgba(0,0,0,0.10);
+                    margin-bottom:20px;
+                    min-height:260px;
+                ">
+                <h3 style="
+                    color:#ff6600;
+                    text-align:center;
+                    font-weight:900;
+                ">
+                    {semester}
+                </h3>
+                """,
+                unsafe_allow_html=True
+            )
+
+            for subject in subjects:
+                st.markdown(f"✅ {subject}")
+
+            st.markdown("</div>", unsafe_allow_html=True)
 
 # ---------------------------------------------------
 # REGISTRATION + AI BOT SECTION
