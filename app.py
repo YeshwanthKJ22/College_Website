@@ -54,11 +54,8 @@ html, body, [class*="css"] {
 }
 
 .semester-box {
-    background-color: #eef5ff;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    border-left: 5px solid #003366;
+    padding: 5px;
+    margin-bottom: 10px;
 }
 
 footer {
