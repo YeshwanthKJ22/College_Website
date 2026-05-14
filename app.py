@@ -1,4 +1,3 @@
-
 import streamlit as st
 import random
 import pandas as pd
@@ -34,31 +33,44 @@ html, body, [class*="css"] {
     font-weight: bold;
 }
 
-.course-card {
-    border-radius: 20px;
-    padding: 25px;
+.premium-course-box {
+    background: linear-gradient(to right, #ffffff, #f0f6ff);
+    border-radius: 18px;
+    padding: 30px;
     margin-bottom: 20px;
+    border: 2px solid #d6e4ff;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
     text-align: center;
+    transition: 0.3s;
 }
 
-.course-title {
-    color: #ff6600;
-    font-size: 32px;
+.selected-course-box {
+    background: linear-gradient(to right, #ffe0b3, #ffcc80);
+    border-radius: 18px;
+    padding: 30px;
+    margin-bottom: 20px;
+    border: 3px solid #ff8800;
+    box-shadow: 0px 6px 16px rgba(0,0,0,0.18);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.premium-course-title {
+    font-size: 30px;
     font-weight: 900;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.25);
+    color: #ff6600;
     letter-spacing: 1px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
 }
 
-.fee-style {
-    color: green;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-.semester-box {
-    padding: 5px;
-    margin-bottom: 10px;
+.course-button button {
+    width: 100%;
+    height: 120px;
+    background-color: transparent;
+    border: none;
+    margin-top: -120px;
+    opacity: 0;
+    cursor: pointer;
 }
 
 footer {
@@ -207,212 +219,100 @@ courses = {
 # ---------------------------------------------------
 # COLLEGE INFRASTRUCTURE SECTION
 # ---------------------------------------------------
-st.markdown("---")
-
 st.header("🏛️ College Infrastructure")
 
-st.markdown("""
-### Career Depth, Vision High Campus
-
-Career Depth, Vision High provides world-class infrastructure
-designed to support academic excellence and student growth.
-""")
-
-# ---------------------------------------------------
-# PARALLEL SECTIONS
-# ---------------------------------------------------
 left_col, right_col = st.columns(2)
 
-# ---------------------------------------------------
-# CAMPUS FACILITIES
-# ---------------------------------------------------
 with left_col:
 
     st.markdown("""
-    ## 🏢 Campus Facilities
+    ### Campus Facilities
 
     - Smart Digital Classrooms
     - Advanced Computer Laboratories
     - High Speed Wi-Fi Campus
-    - Modern Library with Digital Resources
+    - Modern Library
     - Placement & Training Center
-    - Seminar and Conference Halls
-    - Sports and Recreation Facilities
-    - Innovation & Research Labs
-    - Cafeteria and Student Activity Center
+    - Innovation Labs
+    - Seminar Halls
+    - Sports Facilities
     """)
 
-# ---------------------------------------------------
-# WHY CHOOSE OUR COLLEGE
-# ---------------------------------------------------
 with right_col:
 
     st.markdown("""
-    ## ⭐ Why Choose Our College?
+    ### Why Choose Our College?
 
-    - Experienced Faculty Members
     - Industry Oriented Curriculum
+    - Experienced Faculty
     - Placement Assistance
-    - Practical Learning Environment
     - Career Development Programs
-    - Student Friendly Campus
-    - Modern Teaching Methods
-    - Skill Development Programs
     - Internship Opportunities
+    - Practical Learning Environment
+    - Student Friendly Campus
     """)
 
-st.markdown("""
-Our institution focuses on building future leaders with
-innovation, creativity, and professional excellence.
-""")
-
 # ---------------------------------------------------
-# PREMIUM COURSES OFFERED SECTION
+# PREMIUM COURSES SECTION
 # ---------------------------------------------------
 st.markdown("---")
 
-st.markdown("""
-<style>
-
-.premium-course-box {
-    background: linear-gradient(to right, #ffffff, #f0f6ff);
-    border-radius: 18px;
-    padding: 25px;
-    margin-bottom: 20px;
-    border: 2px solid #d6e4ff;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
-    text-align: center;
-}
-
-.selected-course-box {
-    background: linear-gradient(to right, #fff4e6, #ffe0b3);
-    border-radius: 18px;
-    padding: 25px;
-    margin-bottom: 20px;
-    border: 3px solid #ff9900;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
-    text-align: center;
-}
-
-.premium-course-title {
-    font-size: 30px;
-    font-weight: 900;
-    color: #ff6600;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.15);
-}
-
-</style>
-""", unsafe_allow_html=True)
-
 st.header("🎓 Courses Offered")
-
-st.write("""
-Explore our Undergraduate and Postgraduate programs designed
-for academic excellence and career growth.
-""")
 
 course_names = list(courses.keys())
 
-# ---------------------------------------------------
-# DEFAULT COURSE SELECTION
-# ---------------------------------------------------
 if "selected_course" not in st.session_state:
     st.session_state["selected_course"] = course_names[0]
 
 cols = st.columns(4)
 
-# ---------------------------------------------------
-# COURSE BOXES
-# ---------------------------------------------------
 for index, course in enumerate(course_names):
 
     with cols[index % 4]:
 
-        # Highlight Selected Course
-        if st.session_state["selected_course"] == course:
+        selected = st.session_state["selected_course"] == course
 
-            st.markdown(
-                f"""
-                <div class="selected-course-box">
-                    <div class="premium-course-title">{course}</div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        box_class = (
+            "selected-course-box"
+            if selected
+            else "premium-course-box"
+        )
 
-        else:
+        st.markdown(
+            f"""
+            <div class="{box_class}">
+                <div class="premium-course-title">{course}</div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
 
-            st.markdown(
-                f"""
-                <div class="premium-course-box">
-                    <div class="premium-course-title">{course}</div>
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+        if st.button("", key=f"course_{course}"):
 
-        # Course Selection Button
-        if st.button(f"Select {course}", key=course):
             st.session_state["selected_course"] = course
 
 # ---------------------------------------------------
-# SINGLE VIEW DETAILS BUTTON
-# ---------------------------------------------------
-st.markdown("<br>", unsafe_allow_html=True)
-
-view_details = st.button("📘 View Selected Course Details")
-
-# ---------------------------------------------------
 # COURSE DETAILS
 # ---------------------------------------------------
-if view_details or "selected_course" in st.session_state:
+selected = st.session_state["selected_course"]
+details = courses[selected]
 
-    selected = st.session_state["selected_course"]
-    details = courses[selected]
+st.markdown("---")
 
-    st.markdown("---")
-    st.subheader(f"📘 {selected} Course Details")
+st.subheader(f"📘 {selected} Course Details")
 
-    st.write(f"### Full Course Name: {details['full_name']}")
-    st.write(f"### 💰 Fees Structure: {details['fees']}")
-    st.write(f"### 📚 Number of Semesters: {details['semesters']}")
+st.write(f"### Full Course Name: {details['full_name']}")
+st.write(f"### 💰 Fees Structure: {details['fees']}")
+st.write(f"### 📚 Number of Semesters: {details['semesters']}")
 
-    st.markdown("## Semester Wise Subjects")
+st.markdown("## Semester Wise Subjects")
 
-    for semester, subjects in details["subjects"].items():
+for semester, subjects in details["subjects"].items():
 
-        st.write(f"### {semester}")
+    st.write(f"### {semester}")
 
-        for subject in subjects:
-            st.write(f"• {subject}")            
-# ---------------------------------------------------
-# COURSE DETAILS
-# ---------------------------------------------------
-if "selected_course" in st.session_state:
-
-    selected = st.session_state["selected_course"]
-    details = courses[selected]
-
-    st.markdown("---")
-    st.subheader(f"📘 {selected} Course Details")
-
-    st.write(f"### Full Course Name: {details['full_name']}")
-    st.write(f"### 💰 Fees Structure: {details['fees']}")
-    st.write(f"### 📚 Number of Semesters: {details['semesters']}")
-
-    st.markdown("## Semester Wise Subjects")
-
-    for semester, subjects in details["subjects"].items():
-
-        st.markdown('<div class="semester-box">', unsafe_allow_html=True)
-
-        st.write(f"### {semester}")
-
-        for subject in subjects:
-            st.write(f"• {subject}")
-
-        st.markdown('</div>', unsafe_allow_html=True)
+    for subject in subjects:
+        st.write(f"• {subject}")
 
 # ---------------------------------------------------
 # REGISTRATION + AI BOT SECTION
@@ -467,208 +367,33 @@ with right_col:
 
     st.header("🤖 AI Bot Assistant")
 
-    st.write("""
-    Welcome to the Smart College AI Assistant.
-
-    You can ask questions related to:
-    - Courses
-    - Studies
-    - Fees
-    - Admissions
-    - Organizations
-    - Placements
-    - Career Opportunities
-    - College Information
-    """)
-
     user_question = st.text_input("Ask Your Question")
 
     if user_question:
 
         question = user_question.lower()
 
-        response = ""
+        if "fees" in question:
+            response = "Course fees range between ₹45,000 and ₹1,20,000 per year."
 
-        # ---------------------------------------------------
-        # COURSE RELATED
-        # ---------------------------------------------------
+        elif "admission" in question:
+            response = "Admissions are currently open for all courses."
 
-        if "bca" in question:
-            response = """
-            BCA (Bachelor of Computer Applications) focuses on:
-            - Programming
-            - Web Development
-            - Database Management
-            - Artificial Intelligence
-            - Software Development
+        elif "placement" in question:
+            response = "Placement support is available for IT, Banking, HR and Marketing sectors."
 
-            Career Opportunities:
-            Software Developer, Web Developer, Data Analyst, AI Engineer.
-            """
+        elif "bca" in question:
+            response = "BCA focuses on Programming, AI, Web Development and Software Engineering."
 
         elif "mba" in question:
-            response = """
-            MBA (Master of Business Administration) develops:
-            - Leadership Skills
-            - Marketing Knowledge
-            - Financial Management
-            - Human Resource Management
-
-            Career Opportunities:
-            Business Analyst, HR Manager, Marketing Manager, Entrepreneur.
-            """
-
-        elif "mca" in question:
-            response = """
-            MCA (Master of Computer Applications) focuses on:
-            - Advanced Programming
-            - Cloud Computing
-            - Cyber Security
-            - Machine Learning
-
-            Career Opportunities:
-            Software Engineer, AI Engineer, Cloud Architect.
-            """
-
-        elif "bcom" in question or "commerce" in question:
-            response = """
-            B.Com focuses on:
-            - Accounting
-            - Finance
-            - Taxation
-            - Banking
-
-            Career Opportunities:
-            Accountant, Auditor, Financial Analyst, Banking Professional.
-            """
-
-        elif "ba" in question or "arts" in question:
-            response = """
-            BA and MA courses focus on:
-            - Humanities
-            - Literature
-            - Psychology
-            - Sociology
-            - Communication Skills
-
-            Career Opportunities:
-            Professor, Journalist, Writer, Social Worker.
-            """
-
-        # ---------------------------------------------------
-        # FEES RELATED
-        # ---------------------------------------------------
-
-        elif "fees" in question or "fee" in question:
-            response = """
-            Fee Structure:
-
-            - BCA : ₹75,000 / Year
-            - BBM : ₹68,000 / Year
-            - BCom : ₹60,000 / Year
-            - BA : ₹45,000 / Year
-            - MCA : ₹95,000 / Year
-            - MBA : ₹1,20,000 / Year
-            - MCom : ₹82,000 / Year
-            - MA : ₹70,000 / Year
-            """
-
-        # ---------------------------------------------------
-        # ADMISSION RELATED
-        # ---------------------------------------------------
-
-        elif "admission" in question or "apply" in question:
-            response = """
-            Admissions are currently open.
-
-            Required Documents:
-            - Marks Cards
-            - Aadhaar Card
-            - Passport Size Photos
-            - Transfer Certificate
-
-            You can register through the Student Registration section.
-            """
-
-        # ---------------------------------------------------
-        # PLACEMENT RELATED
-        # ---------------------------------------------------
-
-        elif "placement" in question or "job" in question:
-            response = """
-            Placement Opportunities:
-
-            - Software Companies
-            - Banking Sector
-            - Marketing Companies
-            - HR Organizations
-            - Analytics Companies
-
-            Top students receive internship and placement support.
-            """
-
-        # ---------------------------------------------------
-        # ORGANIZATION / COLLEGE RELATED
-        # ---------------------------------------------------
-
-        elif "organization" in question or "college" in question:
-            response = """
-            Career Depth, Vision High is focused on:
-            - Quality Education
-            - Innovation
-            - Skill Development
-            - Leadership Training
-            - Career Growth
-
-            Our goal is to prepare students for successful careers.
-            """
-
-        # ---------------------------------------------------
-        # STUDIES RELATED
-        # ---------------------------------------------------
-
-        elif "study" in question or "studies" in question:
-            response = """
-            Effective study tips:
-            - Maintain daily study schedule
-            - Practice previous question papers
-            - Focus on practical learning
-            - Improve communication skills
-            - Participate in projects and seminars
-            """
-
-        # ---------------------------------------------------
-        # GREETINGS
-        # ---------------------------------------------------
-
-        elif "hello" in question or "hi" in question:
-            response = """
-            Hello 👋
-            Welcome to Career Depth, Vision High.
-            How can I assist you today?
-            """
-
-        # ---------------------------------------------------
-        # DEFAULT RESPONSE
-        # ---------------------------------------------------
+            response = "MBA develops Leadership, Marketing and Business Management skills."
 
         else:
-            response = f"""
-            Thank you for your question:
-
-            "{user_question}"
-
-            Our AI Assistant is continuously learning to support students with:
-            - Academic Information
-            - Course Guidance
-            - Fees Information
-            - Career Opportunities
-            - Placement Assistance
-
-            Please contact the college administration for more detailed support.
-            """
+            response = "Our college provides quality education, career development and placement assistance."
 
         st.success(response)
+
+# ---------------------------------------------------
 # FOOTER
 # ---------------------------------------------------
 st.markdown("---")
