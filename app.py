@@ -56,6 +56,14 @@ html, body, [class*="css"] {
     font-weight: bold;
 }
 
+.semester-box {
+    background-color: #eef5ff;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border-left: 5px solid #003366;
+}
+
 footer {
     text-align: center;
     font-size: 18px;
@@ -93,52 +101,109 @@ st.markdown("---")
 # COURSE DATA
 # ---------------------------------------------------
 courses = {
+
     "B.C.A": {
-        "duration": "3 Years",
+        "full_name": "Bachelor of Computer Applications",
         "fees": "₹75,000 / Year",
-        "description": "Bachelor of Computer Applications focuses on programming, cloud computing, and software development."
+        "semesters": 6,
+        "subjects": {
+            "Semester 1": ["Programming in C", "Mathematics", "Digital Fundamentals"],
+            "Semester 2": ["Data Structures", "Python", "Operating Systems"],
+            "Semester 3": ["Java Programming", "Database Management", "Computer Networks"],
+            "Semester 4": ["Web Development", "Software Engineering", "Cloud Computing"],
+            "Semester 5": ["Artificial Intelligence", "Machine Learning", "Cyber Security"],
+            "Semester 6": ["Project Work", "Mobile Applications", "Data Analytics"]
+        }
     },
 
     "B.B.M": {
-        "duration": "3 Years",
+        "full_name": "Bachelor of Business Management",
         "fees": "₹68,000 / Year",
-        "description": "Bachelor of Business Management develops leadership and entrepreneurship skills."
+        "semesters": 6,
+        "subjects": {
+            "Semester 1": ["Business Basics", "Accounting", "Economics"],
+            "Semester 2": ["Marketing", "Business Law", "Human Resource"],
+            "Semester 3": ["Finance", "Entrepreneurship", "Statistics"],
+            "Semester 4": ["Management Principles", "Operations", "Taxation"],
+            "Semester 5": ["Leadership", "Digital Marketing", "Business Analytics"],
+            "Semester 6": ["Project", "Strategic Management", "International Business"]
+        }
     },
 
     "B.Com": {
-        "duration": "3 Years",
+        "full_name": "Bachelor of Commerce",
         "fees": "₹60,000 / Year",
-        "description": "Bachelor of Commerce includes finance, taxation, accounting, and banking concepts."
+        "semesters": 6,
+        "subjects": {
+            "Semester 1": ["Financial Accounting", "Economics", "Business Studies"],
+            "Semester 2": ["Corporate Accounting", "Banking", "Business Law"],
+            "Semester 3": ["Taxation", "Auditing", "Cost Accounting"],
+            "Semester 4": ["Management Accounting", "Statistics", "Finance"],
+            "Semester 5": ["GST", "Investment Management", "Entrepreneurship"],
+            "Semester 6": ["Project", "International Finance", "Research Methodology"]
+        }
     },
 
     "B.A": {
-        "duration": "3 Years",
+        "full_name": "Bachelor of Arts",
         "fees": "₹45,000 / Year",
-        "description": "Bachelor of Arts covers communication, literature, psychology, and social sciences."
+        "semesters": 6,
+        "subjects": {
+            "Semester 1": ["English", "History", "Political Science"],
+            "Semester 2": ["Psychology", "Sociology", "Economics"],
+            "Semester 3": ["Journalism", "Public Administration", "Literature"],
+            "Semester 4": ["Communication Skills", "Philosophy", "Geography"],
+            "Semester 5": ["Media Studies", "Creative Writing", "Human Rights"],
+            "Semester 6": ["Project", "Modern History", "Social Research"]
+        }
     },
 
     "M.C.A": {
-        "duration": "2 Years",
+        "full_name": "Master of Computer Applications",
         "fees": "₹95,000 / Year",
-        "description": "Master of Computer Applications offers advanced software engineering knowledge."
+        "semesters": 4,
+        "subjects": {
+            "Semester 1": ["Advanced Programming", "Data Structures", "Mathematics"],
+            "Semester 2": ["Cloud Computing", "AI", "Database Systems"],
+            "Semester 3": ["Machine Learning", "Cyber Security", "Big Data"],
+            "Semester 4": ["Project Work", "Research", "Software Architecture"]
+        }
     },
 
     "M.B.A": {
-        "duration": "2 Years",
+        "full_name": "Master of Business Administration",
         "fees": "₹1,20,000 / Year",
-        "description": "Master of Business Administration focuses on marketing, HR, finance, and leadership."
+        "semesters": 4,
+        "subjects": {
+            "Semester 1": ["Management", "Accounting", "Economics"],
+            "Semester 2": ["Marketing", "HR", "Finance"],
+            "Semester 3": ["Business Analytics", "Leadership", "Operations"],
+            "Semester 4": ["Project", "Strategic Management", "International Business"]
+        }
     },
 
     "M.Com": {
-        "duration": "2 Years",
+        "full_name": "Master of Commerce",
         "fees": "₹82,000 / Year",
-        "description": "Master of Commerce specializes in economics and commerce research."
+        "semesters": 4,
+        "subjects": {
+            "Semester 1": ["Advanced Accounting", "Economics", "Finance"],
+            "Semester 2": ["Taxation", "Research Methods", "Banking"],
+            "Semester 3": ["Investment Analysis", "Corporate Law", "Auditing"],
+            "Semester 4": ["Project", "Financial Markets", "Business Ethics"]
+        }
     },
 
     "M.A": {
-        "duration": "2 Years",
+        "full_name": "Master of Arts",
         "fees": "₹70,000 / Year",
-        "description": "Master of Arts provides expertise in humanities and media studies."
+        "semesters": 4,
+        "subjects": {
+            "Semester 1": ["Advanced Literature", "Sociology", "Psychology"],
+            "Semester 2": ["Communication", "Philosophy", "Political Science"],
+            "Semester 3": ["Media Studies", "Human Rights", "Research"],
+            "Semester 4": ["Project", "Cultural Studies", "Creative Writing"]
+        }
     }
 }
 
@@ -177,13 +242,22 @@ if "selected_course" in st.session_state:
     st.markdown("---")
     st.subheader(f"📘 {selected} Course Details")
 
-    st.write(f"### ⏳ Duration: {details['duration']}")
-    st.write(details["description"])
+    st.write(f"### Full Course Name: {details['full_name']}")
+    st.write(f"### 💰 Fees Structure: {details['fees']}")
+    st.write(f"### 📚 Number of Semesters: {details['semesters']}")
 
-    st.markdown(
-        f'<div class="fee-style">💰 Fees: {details["fees"]}</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown("## Semester Wise Subjects")
+
+    for semester, subjects in details["subjects"].items():
+
+        st.markdown('<div class="semester-box">', unsafe_allow_html=True)
+
+        st.write(f"### {semester}")
+
+        for subject in subjects:
+            st.write(f"• {subject}")
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------------------------------------------------
 # REGISTRATION FORM
