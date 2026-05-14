@@ -261,7 +261,7 @@ if "selected_course" in st.session_state:
 st.markdown("---")
 st.header("📝 Student Registration")
 
-left_space, form_container, right_space = st.columns([2,3])
+form_container, empty_space = st.columns([2,3])
 
 with form_container:
 
