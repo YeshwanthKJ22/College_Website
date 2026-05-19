@@ -19,7 +19,7 @@ html, body, [class*="css"] {
 }
 
 .main-title {
-    font-size: 58px;
+    font-size: 60px;
     font-weight: 900;
     color: #ffb400;
     text-shadow: 3px 3px 8px rgba(0,0,0,0.25);
@@ -27,7 +27,7 @@ html, body, [class*="css"] {
 }
 
 .sub-title {
-    font-size: 22px;
+    font-size: 18px;
     color: #fff4e6;
     font-style: italic;
     font-weight: bold;
