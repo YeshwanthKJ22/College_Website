@@ -72,7 +72,7 @@ html, body, [class*="css"] {
 footer {
     text-align: center;
     font-size: 18px;
-    color: #555;
+    color: #fff4e6;
 }
 
 </style>
