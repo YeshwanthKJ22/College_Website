@@ -28,7 +28,7 @@ html, body, [class*="css"] {
 
 .sub-title {
     font-size: 22px;
-    color: #003366;
+    color: #fff4e6;
     font-style: italic;
     font-weight: bold;
 }
